@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>好多墙</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<script src="../js/mui.min.js"></script>
+		<style type="text/css">
+			#list {
+				/*避免导航边框和列表背景边框重叠，看起来像两条边框似得；*/
+				margin-top: -1px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<ul id="list" class="mui-table-view mui-table-view-chevron">
+			</ul>
+		</div>
+		<script>
+			//---------------------------------------------------------------------------------------
+			var limit = 3,
+				count = 0,
+				url = 'http://y.wall.com/api/getPlaceData';
+			//---------------------------------------------------------------------------------------
+			mui.init({
+				preloadLimit: limit, //同时并存的预加载窗口数量
+				swipeBack: false,
+			});
+			//--------------------------------------------------------------------------------------
+			(function($) {
+				//获取墙列表数据的成功回调
+				var success = function(data){
+					//var data = JSON.parse(rs);
+					var lis = [];
+					//拼装列表
+					if(data.errno === 0) {
+						data.data.pois.forEach(function(value){
+							//debugger;
+							lis.push('<li class="mui-table-view-cell"><a class="mui-navigate-right" href="detail.html">' + value +'</a></li>');
+						});
+						document.getElementById('list').innerHTML = lis.join('');
+					}
+					
+					//初始化一级列表的预加载
+					$('#list>.mui-table-view-cell', document.body).each(function() {
+						//只预加载一级列表，二级列表在其展开时再预加载；
+						if (!this.classList.contains('mui-collapse')) {
+							var url = this.querySelector('a').getAttribute("href");
+							//预加载，默认使用url作为其id
+							$.preload({
+								url: url,
+							});
+							if (++count >= limit) {
+								return false;
+							}
+						}
+					});
+				};
+				
+				//请求墙列表数据
+				var getWallList = function(codns) {
+					//respnoseEl.innerHTML = '正在请求中...';
+					//这里放菊花
+		
+//					$.ajax({
+//						url: url,
+//						dataType: 'json',
+//						data: {
+//							lat: codns.latitude, //当前位置的经度
+//							lng: codns.longitude //当前位置的纬度
+//						},
+//						success: success
+//					});
+					success({"errno":0,"data":{"addr":"\u5317\u4eac\u5e02\u4e1c\u57ce\u533a\u4e2d\u534e\u8def\u753210\u53f7","pois":["\u5929\u5b89\u95e8","\u4e2d\u5c71\u516c\u56ed","\u6545\u5bab\u535a\u7269\u9662","\u5929\u5b89\u95e8\u65c5\u6e38\u7eaa\u5ff5\u54c1","\u592a\u5e99","\u5929\u5b89\u95e8\u5feb\u9910\u5385","\u83d6\u84b2\u6cb3\u516c\u56ed","\u6587\u5316\u5bab\u6d3e\u51fa\u6240","\u6587\u5316\u5bab\u5199\u5b57\u697c","\u52b3\u52a8\u4eba\u6c11\u6587\u5316\u5bab\u5357\u95e8"]},"msg":"OK"});
+				};
+				//--------------------------------------------------------------------------------------
+				$.ready(function() {
+//					if(typeof plus != 'undefined' && plus.geolocation){
+//						plus.geolocation.getCurrentPosition(function(position){ //获取地理位置成功的回调
+//							var codns = position.coords;//获取地理坐标信息；
+//							getWallList(codns);//加载墙
+//						}, function(){ //获取地理位置失败的回调
+//							alert('获取地理位置失败');
+//						});
+//					}else{
+//						getWallList({
+//							latitude: '39.91571',
+//							longitude: '116.404341'
+//						}); //加载墙
+//					}
+//					
+//					
+//
+//					// 关闭启动界面
+//					//plus.navigator.closeSplashscreen();
+//					//下拉刷新两个平台有区别；
+//					if ($.os.ios) {
+//						document.getElementById('pull-refresh-pandora').style.display = "none";
+//					} else if ($.os.android) {
+//						document.getElementById('pull-refresh-h5').style.display = "none";
+//						var list = document.querySelectorAll('.ios-only');
+//						if (list) {
+//							for (var i = 0; i < list.length; i++) {
+//								list[i].style.display = 'none';
+//							}
+//						}
+//					}
+				});
+				//--------------------------------------------------------------------------------------
+				//处理点击事件
+				$.ready(function() {
+					$('body').on('tap', 'a', function(e) {
+						var id = this.getAttribute('href');
+						if (id) {
+							if (~id.indexOf('.html')) {
+								if (window.plus) {
+									//侧滑导航涉及Index问题，需要单独处理；
+									if (~id.indexOf('offcanvas-')) {
+										$.openWindow({
+											id: id,
+											url: this.href,
+											styles: {
+												zindex: 9999
+											},
+											preload: true
+										});
+									} else {
+										$.openWindow({
+											id: id,
+											url: this.href,
+											preload: true,
+											extras: {
+												id: 1 //- 墙的id
+											}
+										});
+									}
+								} else {
+									document.location.href = this.href;
+								}
+							} else {
+								if (typeof plus !== 'undefined') {
+									//plus.runtime.openURL(id);
+								}
+							}
+						}
+					});
+				});
+			})(mui);
+		</script>
+	</body>
+
+</html>

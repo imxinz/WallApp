@@ -1,0 +1,6 @@
+<ul id="list" class="mui-table-view mui-table-view-chevron">
+	<% for(var i = 0; i < data.length; i++) {
+		var item = data[i]; %>
+		<li class="mui-table-view-cell"><a class="mui-navigate-right" href="topic.html"><%=item.username%>:<%=item.words%></a></li>
+	<% } %>
+</ul>

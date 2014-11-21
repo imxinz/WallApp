@@ -1,0 +1,23 @@
+#list {
+	/*避免导航边框和列表背景边框重叠，看起来像两条边框似得；*/
+	margin-top: -1px;
+}
+
+.appui-bar-bottom {
+	bottom: 0;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	align-items: center;
+}
+	.appui-bar-bottom__item {
+		flex: 1;
+		text-align: center;
+	}
+	.appui-bar-bottom__input {
+		flex: 4;
+	}
+	.appui-bar-bottom__input input {
+		margin-bottom: 0;
+		height: 28px;;
+	}
