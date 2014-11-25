@@ -25,6 +25,25 @@ input {
 .mui-media-body {
 	position: relative;
 }
+.mui-content {
+	background: #272c2e;
+    padding: 5px;
+}
+.mui-bar-nav {
+	background: #ffd600;
+	box-shadow: none;
+}
+a {
+	color: #272c2e;
+}
+.mui-title {
+	color: #272c2e;
+	font-family: "microsoft yahei";
+}
+body.wall-frame {
+	background: #272c2e;
+}
+
 /***************************************************************
  * appui组件
  **************************************************************/

@@ -18,7 +18,10 @@ define([
 				alert('WallList接口返回错误码' + data.errno);
 				return plus.webview.currentWebview().reload();
 			}
+			alert(tplWallList);
+			alert(JSON.stringify(data));
 			var wallListHtml = Template.tmpl(tplWallList, {data: data.data.pois});
+			alert(wallListHtml);
 			wallListContainer.innerHTML = wallListHtml;
 		}).fail(function(){
 			alert('请求WallList接口失败');

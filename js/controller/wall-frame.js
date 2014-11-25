@@ -5,12 +5,12 @@ define([
 	function(tplPhoto, Template, Url){
 	'use strict';
 	
-	var photoContainer = document.getElementById('photoContainer');
-	var searchObject = Url.parse(window.location.href).searchObject;
-	var wall = {
-		key: searchObject.wallKey || '',
-		name: searchObject.wallName || ''
-	};
+//	var photoContainer = document.getElementById('photoContainer');
+//	var searchObject = Url.parse(window.location.href).searchObject;
+//	var wall = {
+//		key: searchObject.wallKey || '',
+//		name: searchObject.wallName || ''
+//	};
 	var camera = null;
 	var contentPage = null;
 	
@@ -27,23 +27,23 @@ define([
 			url : 'wall-content.html',
 			styles : {
 				top : '48px',
-				bottom : '48px',
+				bottom : '0',
 				bounce :'vertical'
 				//scrollIndicator : "none"
 			}
 		}]
 	});
-	mui.ready(function(){
-		$('.js-page-head').text(decodeURIComponent(wall.name));
-	});
-	
-	setTimeout(function(){
-		if( !window.plus ) return alert('plus没准备好');
-		if( !contentPage ) {
-			contentPage = plus.webview.getWebviewById('wall-content.html');
-		}
-		mui.fire(contentPage, 'getTopicList', wall); //触发内容子页面的getTopicList事件
-	}, 500);
+//	mui.ready(function(){
+//		$('.js-page-head').text(decodeURIComponent(wall.name));
+//	});
+//	
+//	setTimeout(function(){
+//		if( !window.plus ) return alert('plus没准备好');
+//		if( !contentPage ) {
+//			contentPage = plus.webview.getWebviewById('wall-content.html');
+//		}
+//		mui.fire(contentPage, 'getTopicList', wall); //触发内容子页面的getTopicList事件
+//	}, 500);
 	
 	/************************************************************************************
 	 * 交互事件处理
