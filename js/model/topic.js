@@ -8,8 +8,8 @@ define([], function(){
 	var host = 'http://10.16.29.96:8080';
 	var path = {
 		getTopicListByWallId: '/topic/list', // { wallKey: 墙id, pn: 页 }
-		addTopic: '/wall/add', // { wallName: 墙名称 , words: 留言问题, imgUrl: 留言图片 }
-		dotTopic: '/wall/dot' // { id: 留言id }
+		addTopic: '/topic/add', // { wallName: 墙名称 , words: 留言问题, imgUrl: 留言图片 }
+		dotTopic: '/topic/dot' // { id: 留言id }
 	};
 	return {
 		/*************************************************************************************
@@ -23,7 +23,7 @@ define([], function(){
 					wallKey: wallId,
 					pn: 1
 				},
-				dataType: 'jsonp'
+				dataType: 'json'
 			});
 		},
 		/*************************************************************************************
@@ -32,14 +32,15 @@ define([], function(){
 		 * @param {Number} userId
 		 * @param {Object} topic
 		 */
-		addTopic: function(wallId, userId, topic){
+		addTopic: function(wall, topic, user){
 			return $.ajax({
 				url: host + path.addTopic,
 				data: {
-					wallName: wallId,
-					userId: userId,
-					words: topic.text,
-					imgUrl: topic.photo
+					wallName: wall.name || '',
+					wallKey: wall.key || '',
+					words: topic.words || '',
+					imgUrl: topic.imgUrl || '',
+					userId: user.id || ''
 				},
 				dataType: 'json'
 			});
@@ -54,8 +55,8 @@ define([], function(){
 			return $.ajax({
 				url: host + path.dotTopic,
 				data: {
-					topicId: TopicId,
-					userId: userId
+					id: topicId || '',
+					userId: userId || ''
 				},
 				dataType: 'json'
 			});

@@ -2,22 +2,51 @@
 	/*避免导航边框和列表背景边框重叠，看起来像两条边框似得；*/
 	margin-top: -1px;
 }
-
-.appui-bar-bottom {
-	bottom: 0;
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: space-around;
-	align-items: center;
+input {
+	-webkit-user-select: auto !important;
 }
-	.appui-bar-bottom__item {
-		flex: 1;
-		text-align: center;
+
+/***************************************************************
+ * mui组件重写
+ **************************************************************/
+.mui-table-view-chevron .mui-table-view-cell {
+	padding-right: 15px;
+}
+.mui-bar-tab .mui-tab-item-input {
+	width: 3%;
+}
+	.mui-bar-tab .mui-tab-item-input input {
+		margin: auto;
+		height: 35px;
 	}
-	.appui-bar-bottom__input {
-		flex: 4;
+	.mui-bar-tab .mui-tab-item.mui-active {
+		color: inherit;
 	}
-	.appui-bar-bottom__input input {
-		margin-bottom: 0;
-		height: 28px;;
+.mui-media-body {
+	position: relative;
+}
+/***************************************************************
+ * appui组件
+ **************************************************************/
+.appui-topic-photo{
+	width: 100%;
+}
+.appui-like {
+	position: absolute;
+	right: 0;
+	top: 50%;
+}
+.appui-comment-list {
+	padding-bottom: 48px;
+	top: 0;
+	margin-top: 0;
+}
+.appui-bar-photo {
+	bottom: 48px;
+	text-align: left;
+	padding: 0 10px;
+	display: none;
+}
+	.appui-bar-photo .mui-tab-item {
+		margin-right: 5px;
 	}

@@ -4,11 +4,8 @@ define([
 	'../model/wall'],
 	function(tplWallList, Template, Wall){
 	'use strict';
-	
 	var wallListContainer = document.getElementById('wallListContainer');
-	
 	mui.init();
-	
 	/************************************************************************************
 	 * 获取数据，渲染页面
 	 ***********************************************************************************/
@@ -17,27 +14,30 @@ define([
 		Wall.getWallListByLocation(coords)
 		.done(function(data){
 			console.log('WallList接口返回数据：', data);
-			if(data.errno !== 0) return;
+			if(data.errno !== 0) {
+				alert('WallList接口返回错误码' + data.errno);
+				return plus.webview.currentWebview().reload();
+			}
 			var wallListHtml = Template.tmpl(tplWallList, {data: data.data.pois});
 			wallListContainer.innerHTML = wallListHtml;
+		}).fail(function(){
+			alert('请求WallList接口失败');
 		});
 	}
 	
-	mui.ready(function() {
-//		plus.geolocation.getCurrentPosition(function(position){
-//			var coords  = position.coords;//获取地理坐标信息；
-//			getWallList(codns);//加载墙
-//		}, function(){ //获取地理位置失败的回调
-//			alert('获取地理位置失败');
-//		});
-		getWallList({
-			coords: {
-				longitude: '116.322987',
-				latitude: '39.983424'
-				}
-			});
+	mui.plusReady(function() {
+		plus.geolocation.getCurrentPosition(function(position){
+			getWallList(position);//加载墙
+		}, function(){ //获取地理位置失败的回调
+			alert('获取地理位置失败');
+		});
+//		getWallList({
+//			coords: {
+//				longitude: '116.322987',
+//				latitude: '39.983424'
+//				}
+//			});
 	});
-	
 	/************************************************************************************
 	 * 交互事件处理
 	 ***********************************************************************************/

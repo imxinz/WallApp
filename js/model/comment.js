@@ -5,10 +5,10 @@
 define([], function(){
 	'use strict';
 	
-	var host = 'http://10.16.29.102:8080';
+	var host = 'http://10.16.29.96:8080';
 	var path = {
 		getCommentListByTopicId: '/comments/getComments', // { topicId: 留言id， start: 起始位置, count: 获取的数量 }
-		addComment: '/comments/add' // { topicId: 留言id， userId: 用户id, text: 评论内容 }
+		addComment: '/comments/add' // { mid: 留言id， wName: 墙名称, content: 评论内容 }
 	};
 	return {
 		/*************************************************************************************
@@ -19,11 +19,11 @@ define([], function(){
 		 */
 		getCommentListByTopicId: function(topicId, start, count){
 			return $.ajax({
-				url: host + path.getCommentListByTopicId
+				url: host + path.getCommentListByTopicId,
 				data: {
-					topicId: topicId,
-					start: start,
-					count: count
+					mid: topicId || '',
+					start: start || 0,
+					count: count || 10
 				},
 				dataType: 'json'
 			});
@@ -34,13 +34,13 @@ define([], function(){
 		 * @param {Number} userId
 		 * @param {String} text
 		 */
-		addComment: function(topicId, userId, text){
+		addComment: function(topic, comment, user){
 			return $.ajax({
-				url: host + path.addComment
+				url: host + path.addComment,
 				data: {
-					topicId: topicId,
-					userId: userId,
-					text: text
+					mid: topic.id,
+					wName: topic.wallName,
+					content: comment.content
 				},
 				dataType: 'json'
 			});

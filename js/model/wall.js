@@ -21,7 +21,7 @@ define([], function(){
 					lat: coords.latitude || '',
 					lng: coords.longitude || ''
 				},
-				dataType: 'jsonp'
+				dataType: 'json'
 			});
 		},
 		/*************************************************************************************

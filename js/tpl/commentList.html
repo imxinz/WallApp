@@ -1,0 +1,13 @@
+<ul class="mui-table-view">
+	<% for(var i = 0; i < data.length; i++) {
+		var item = data[i]; %>
+		<li class="mui-table-view-cell mui-media js-topic-item" data-id="<%=item.id%>">
+			<img class="mui-media-object mui-pull-left" src="<%=item.headImg%>">
+			<div class="mui-media-body">
+				<%=item.username%>
+				<p class="mui-ellipsis"><%=item.content%></p>
+				<span class="appui-like js-like-comment">赞</span>
+			</div>
+		</li>
+	<% } %>
+</ul>
