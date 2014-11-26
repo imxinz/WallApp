@@ -49,7 +49,8 @@ define([
 					if (window.plus) {
 						mui.openWindow({
 							id: id,
-							url: this.href
+							url: this.href,
+							scrollIndicator: 'none'
 						});
 					} else {
 						document.location.href = this.href;
