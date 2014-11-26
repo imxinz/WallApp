@@ -31,7 +31,7 @@ define([
 			console.log('TopicList接口返回数据：', data);
 			if(data.total === 0) return alert('TopicList接口数据为空');
 			var topicListHtml = Template.tmpl(tplTopicList, {data: data.datas, wall: wall});
-			topicListContainer.innerHTML = topicListHtml;
+//			topicListContainer.innerHTML = topicListHtml;
 		})
 		.fail(function(error){
 			return alert(error.message);

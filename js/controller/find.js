@@ -18,10 +18,7 @@ define([
 				alert('WallList接口返回错误码' + data.errno);
 				return plus.webview.currentWebview().reload();
 			}
-			alert(tplWallList);
-			alert(JSON.stringify(data));
 			var wallListHtml = Template.tmpl(tplWallList, {data: data.data.pois});
-			alert(wallListHtml);
 			wallListContainer.innerHTML = wallListHtml;
 		}).fail(function(){
 			alert('请求WallList接口失败');
@@ -33,7 +30,7 @@ define([
 			getWallList(position);//加载墙
 		}, function(){ //获取地理位置失败的回调
 			alert('获取地理位置失败');
-		});
+		}, { provider: 'baidu' });
 //		getWallList({
 //			coords: {
 //				longitude: '116.322987',
