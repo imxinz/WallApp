@@ -26,6 +26,8 @@ define([
 	}
 	
 	mui.plusReady(function() {
+		//设置系统顶部栏颜色
+		plus.navigator.setStatusBarBackground( "#ffd600" );
 		plus.geolocation.getCurrentPosition(function(position){
 			getWallList(position);//加载墙
 		}, function(){ //获取地理位置失败的回调

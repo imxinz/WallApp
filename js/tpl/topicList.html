@@ -1,16 +1,29 @@
-<ul id="list" class="mui-table-view">
-	<% for(var i = 0; i < data.length; i++) {
-		var item = data[i]; %>
-		<li class="mui-table-view-cell mui-media js-topic-item" data-id="<%=item.id%>">
-			<a href="topic-frame.html?username=<%=item.username%>&words=<%=item.words%>&imgUrl=<%=item.imgUrl%>&headImg=<%=item.headImg%>&like=<%=item.like%>&id=<%=item.id%>&wallName=<%=wall.name%>">
-				<img class="appui-topic-photo" src="<%=item.imgUrl%>">
-				<img class="mui-media-object mui-pull-left" src="<%=item.headImg%>">
-				<div class="mui-media-body">
-					<%=item.username%>
-					<p class="mui-ellipsis"><%=item.words%></p>
-					<span class="appui-like js-like-topic">赞</span>
-				</div>
-			</a>
-		</li>
-	<% } %>
-</ul>
+<% for(var i = 0; i < data.length; i++) {
+	var topic = data[i]; %>
+	<div class="topic-layout">
+	    <div class="topic-row">
+	        <div class="topic-item">
+	        	<div>
+	        		<% if (topic.imgUrl) { %>
+	        		<img class="topic-photo" src="<%=topic.imgUrl%>">
+	        		<% } %>
+	            </div>
+	            <div class="topic-body">
+	                <div class="topic-user">
+	                    <img class="topic-head" src="<%=topic.headImg%>">
+	                    <span class="topic-name">
+	                    	<%=topic.username%>
+	                    </span>
+	                </div>
+	            	<div class="topic-content">
+	            		<a href="topic-frame.html?username=<%=topic.username%>&words=<%=topic.words%>&imgUrl=<%=topic.imgUrl%>&headImg=<%=topic.headImg%>&wallName=<%=wall.name%>"><%=topic.words%></a>
+	            	</div>
+	            </div>
+	            <div class="topic-action">
+	                <a class="icon icon--bubble js-comment" href="javascript:void(0);"></a>
+	                <a class="icon icon--heart js-like" href="javascript:void(0);"></a>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+<% } %>

@@ -5,7 +5,8 @@
 define([], function(){
 	'use strict';
 	
-	var host = 'http://10.16.29.96:8080';
+	var host = 'http://210.52.217.236:8080';
+//	var host = 'http://10.16.29.96:8080';
 	var path = {
 		getCommentListByTopicId: '/comments/getComments', // { topicId: 留言id， start: 起始位置, count: 获取的数量 }
 		addComment: '/comments/add' // { mid: 留言id， wName: 墙名称, content: 评论内容 }

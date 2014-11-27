@@ -21,7 +21,7 @@ define([
 	};
 	
 	/************************************************************************************
-	 * 初始化，内容子页面
+	 * 设置状态栏颜色，初始化，内容子页面
 	 ***********************************************************************************/
 	mui.init({
 //		preloadPages: [{
@@ -38,6 +38,22 @@ define([
 //				//scrollIndicator : "none"
 //			}
 //		}]
+//		pullRefresh : {
+//			container: '#topicListContainer',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+//			down : {
+//				contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+//				contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+//				contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+//				callback : function(){
+//					var self = this;
+//					getTopicList(wall, self);
+//				} //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+//			}
+//		}
+	});
+	mui.plusReady(function(){
+		//设置系统顶部栏颜色
+		plus.navigator.setStatusBarBackground( "#ffd600" );
 	});
 	mui.ready(function(){
 		$('.js-page-head').text(decodeURIComponent(wall.name));
@@ -55,51 +71,56 @@ define([
 	/************************************************************************************
 	 * 业务逻辑
 	 ***********************************************************************************/
-	function getTopicList(wall) {
+	function getTopicList(wall, self) {
 		if( !wall.key ) return alert('缺少墙key');
 		Topic.getTopicListByWallId(wall.key)
 		.done(function(data){
 			console.log('TopicList接口返回数据：', data);
 			if(data.total === 0) return alert('TopicList接口数据为空');
 			var topicListHtml = Template.tmpl(tplTopicList, {data: data.datas, wall: wall});
-//			topicListContainer.innerHTML = topicListHtml;
+//			self.endPulldownToRefresh();
+//			alert(topicListHtml);
+			topicListContainer.innerHTML = topicListHtml;
 		})
 		.fail(function(error){
-			return alert(error.message);
+			return alert('TopicList接口请求失败：' + error.message);
 		});
 	}
 	
 	function addTopic(wall, topic, user) {
+		topic.imgUrl = $(photoContainer).find('img').attr('src') || '';
+
 		Topic.addTopic(wall, topic , user)
 		.done(function(data){
 			console.log('TopicAdd接口返回数据：', data);
 			if(data.errno !== 0) return;
-			var _data = {
-				username: user.name,
-				words: topic.words,
-				headImg: user.headImg,
-				imgUrl: ''
-			}
-			var topicHtml = Template.tmpl(tplTopic, {data: _data});
-			$(topicListContainer).find('ul').prepend(topicHtml);
+			$(photoContainer).hide().find('img').remove();
+			var topicHtml = Template.tmpl(tplTopic, {topic: topic, user: user, wall: wall});
+			$(topicListContainer).prepend(topicHtml);
+			window.scrollTo(0, 0);
 		});
 	}
 	function addPhoto(path) {
-		var task = plus.uploader.createUpload( "http://www.test.com/upload.do", 
-			{ method:"POST",blocksize:204800,priority:100 },
+		var task = plus.uploader.createUpload( "http://210.52.217.236:8080/topic/uploadImg", 
+//		var task = plus.uploader.createUpload( "http://10.16.29.96:8080/topic/uploadImg", 
+			{ method:"POST",priority:100 },
 			function ( t, status ) {
+				//alert(JSON.stringify(arguments));
 				// 上传完成
 				if ( status == 200 ) { 
-					alert( "Upload success: " + t.url );
+//					alert( "Upload success: " + t.url );
+//					alert('图片上传接口返回数据：' + arguments);
+					var argObject = JSON.parse(arguments['0'].responseText);
+					var photoHtml = Template.tmpl(tplPhoto, {data: {src: argObject.data}});
+					$(photoContainer).show().append(photoHtml);
 				} else {
 					alert( "Upload failed: " + status );
 				}
 			}
 		);
-		task.addFile( path );
+//		alert('addFile:' + path);
+		task.addFile( path, {key: 'upfile'} );
 		task.start();
-		var photoHtml = Template.tmpl(tplPhoto, {data: {src: path}});
-		$(photoContainer).show().append(photoHtml);		
 	}
 	/************************************************************************************
 	 * 交互事件处理
@@ -117,17 +138,57 @@ define([
 				name: '匿名',
 				headImg: 'http://quc.qhimg.com/dm/180_180_100/t01dc0216d6139b3426.jpg'
 			};
-			mui.fire(contentPage, 'addTopic', {
-				wall: wall,
-				topic: topic
-			});
+//			mui.fire(contentPage, 'addTopic', {
+//				wall: wall,
+//				topic: topic
+//			});
+			addTopic(wall, topic, user);
 			$topicInput.val('');		
+		});
+		//点赞
+		mui('body').on('tap', '.js-like-topic:not(.js-liked)', function(e){
+			var $this = $(this);
+//			alert($this.closest('.js-topic-item').length);
+			var topicId = $this.closest('.js-topic-item').data('id');
+			
+			Topic.dotTopic(topicId)
+			.done(function(data){
+				if(data.errno !== 0) return alert('赞接口返回数据错误');
+				$this.addClass('js-liked').text('已赞');
+			})
+			.fail(function(error){
+				return alert('赞接口请求失败');
+			});
+		});
+		//留言列表点击操作
+		mui('body').on('tap', 'a', function(e) {
+			var id = this.getAttribute('href');
+			if (id) {
+				if (~id.indexOf('.html')) {
+					if (window.plus) {
+//						alert(this.href);
+						mui.openWindow({
+							id: id,
+//							url: this.href,
+							styles: {
+								scrollIndicator: none
+							}
+						});
+					} else {
+						document.location.href = this.href;
+					}
+				} else {
+					if (typeof plus !== 'undefined') {
+						plus.runtime.openURL(id);
+					}
+				}
+			}
 		});
 		//点击手机相册选择
 		mui('body').on('tap', '.js-select-photo', function(e){
 			if( !window.plus ) return alert('plus没准备好');
 			plus.gallery.pick(function(path){
-				alert('Select image success：' + path);
+//				alert('Select image success：' + path);
 				addPhoto(path);
 			}, function(error){
 				alert('Select image failed：' + error.message);
@@ -138,7 +199,7 @@ define([
 			if( !window.plus ) return alert('plus没准备好');
 			if( !camera ) camera = plus.camera.getCamera();
 			camera.captureImage(function(path){
-				alert( "Capture image success: " + path );
+//				alert( "Capture image success: " + path );
 				addPhoto(path);
 			},function(error){
 				alert( "Capture image failed: " + error.message );

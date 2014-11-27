@@ -5,7 +5,8 @@
 define([], function(){
 	'use strict';
 	
-	var host = 'http://10.16.29.96:8080';
+	var host = 'http://210.52.217.236:8080';
+//	var host = 'http://10.16.29.96:8080';
 	var path = {
 		getTopicListByWallId: '/topic/list', // { wallKey: 墙id, pn: 页 }
 		addTopic: '/topic/add', // { wallName: 墙名称 , words: 留言问题, imgUrl: 留言图片 }
