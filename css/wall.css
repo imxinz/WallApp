@@ -41,6 +41,8 @@ body.wall-frame {
 }
 .wall-frame .mui-content {
 	position: relative;
+	top: 0;
+	margin-bottom: 48px;
 }
 
 /***************************************************************

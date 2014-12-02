@@ -1,20 +1,22 @@
 <div class="topic-layout">
     <div class="topic-row">
         <div class="topic-item">
-        	<div>
-        		<% if (topic.imgUrl) { %>
-        		<img class="topic-photo" src="<%=topic.imgUrl%>">
-        		<% } %>
+        	<div class="topic-user">
+                <img class="topic-head" src="<%=topic.headImg%>">
+                <span class="topic-name">
+                	<%=user.name%>
+                </span>
             </div>
             <div class="topic-body">
-                <div class="topic-user">
-                    <img class="topic-head" src="<%=user.headImg%>">
-                    <span class="topic-name">
-                    	<%=user.name%>
-                    </span>
-                </div>
-            	<div class="topic-content">
-            		<a href="topic-frame.html?username=<%=user.username%>&words=<%=topic.words%>&imgUrl=<%=topic.imgUrl%>&headImg=<%=user.headImg%>&wallName=<%=wall.name%>"><%=topic.words%></a>
+            	<div>
+	        		<% if (topic.imgUrl) { %>
+	        		<div class="topic-photo-wrap">
+	        			<img class="topic-photo" src="<%=topic.imgUrl%>">	
+	        		</div>
+	        		<% } %>
+	            </div>
+	            <div class="topic-content">
+            		<a href="topic-frame.html?username=<%=user.name%>&words=<%=topic.words%>&imgUrl=<%=topic.imgUrl%>&headImg=<%=user.headImg%>&wallName=<%=wall.name%>"><%=topic.words%></a>
             	</div>
             </div>
             <div class="topic-action">

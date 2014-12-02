@@ -4,27 +4,50 @@
         border-radius: 6px
     }
     .topic-photo {
-        width: 100%;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
+        /*width: 100%;*/
+       	/*margin:0 auto;*/
+        height: 107px;
+        margin: auto;
+        /*border-top-left-radius: 5px;
+        border-top-right-radius: 5px;*/
+    }
+    .topic-photo-wrap {
+    	height: 111px;
+    	width: 100%;
+    	text-align: center;
+    	display: -webkit-box;
+    	display: -webkit-flex;
+    	display: flex;
     }
     .topic-body {
-        padding: 10px;
+        /*padding: 10px;*/
         border-bottom: 1px solid #dce1e3;
+        height: 162px;
+    }
+    .topic-item-text .topic-body {
+    	display: -webkit-box;
+    	display: -webkit-flex;
+    	display: flex;
+    }
+    .topic-item-text .topic-content {
+    	margin: auto 0;
+    	height: auto;
+    	text-align: center;
     }
     .topic-user {
-        height: 45px;
-        line-height: 35px;
+        height: 35px;
+        line-height: 25px;
         padding-bottom: 10px;
         display: -webkit-box;
         display: -webkit-flex;
         display: flex;
+        padding: 5px;
     }
     .topic-head {
         border-radius: 24px;
-        width: 35px;
-        min-width: 35px;
-        height: 35px;
+        width: 25px;
+        min-width: 25px;
+        height: 25px;
         margin-right: 10px;
     }
     .topic-name {
@@ -32,11 +55,17 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size: .9em;
-        line-height: 35px;
+        font-size: .6em;
     }
     .topic-content {
         color: #3f484b;
+        overflow: hidden;
+        height: 40px;
+        width: 100%;
+        padding: 0 5px;
+        margin-bottom: 10px;
+        font-size: .7em;
+        margin: auto;
     }
     .topic-action {
         text-align: right;
@@ -56,6 +85,8 @@
     }
     .topic-item {
         margin: 5px;
+        flex: 1;
+        -webkit-flex: 1;
     }
     .topic-column {
         margin: 5px;
@@ -77,4 +108,7 @@
     }
         .topic-row .topic-item {
             margin: 0;
+        }
+        .topic-row .topic-body {
+        	height: auto;
         }

@@ -8,7 +8,8 @@ define([], function(){
 	var host = 'http://210.52.217.236:8080';
 //	var host = 'http://10.16.29.102:8080';
 	var path = {
-		getWallListByLocation: '/api/getPlaceData' // { lat: 经度， lng: 纬度 }
+//		getWallListByLocation: '/api/getPlaceData' // { lat: 经度， lng: 纬度 }
+		getWallListByLocation: '/api/getPlaceDataNew' // { lat: 经度， lng: 纬度 }
 	};
 	return {
 		/*************************************************************************************

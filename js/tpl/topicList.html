@@ -1,21 +1,24 @@
 <% for(var i = 0; i < data.length; i++) {
 	var topic = data[i]; %>
+	<% if( i == 0) { %>
 	<div class="topic-layout">
 	    <div class="topic-row">
 	        <div class="topic-item">
-	        	<div>
-	        		<% if (topic.imgUrl) { %>
-	        		<img class="topic-photo" src="<%=topic.imgUrl%>">
-	        		<% } %>
-	            </div>
+	        	<div class="topic-user">
+                    <img class="topic-head" src="<%=topic.headImg%>">
+                    <span class="topic-name">
+                    	<%=topic.username%>
+                    </span>
+                </div>
 	            <div class="topic-body">
-	                <div class="topic-user">
-	                    <img class="topic-head" src="<%=topic.headImg%>">
-	                    <span class="topic-name">
-	                    	<%=topic.username%>
-	                    </span>
-	                </div>
-	            	<div class="topic-content">
+	            	<div>
+		        		<% if (topic.imgUrl) { %>
+		        		<div class="topic-photo-wrap">
+		        			<img class="topic-photo" src="<%=topic.imgUrl%>">	
+		        		</div>
+		        		<% } %>
+		            </div>
+		            <div class="topic-content">
 	            		<a href="topic-frame.html?username=<%=topic.username%>&words=<%=topic.words%>&imgUrl=<%=topic.imgUrl%>&headImg=<%=topic.headImg%>&wallName=<%=wall.name%>"><%=topic.words%></a>
 	            	</div>
 	            </div>
@@ -26,4 +29,55 @@
 	        </div>
 	    </div>
 	</div>
+	<% } else {
+		if( i % 2 == 1 ) { %>
+			<div class="topic-layout">
+				<div class="topic-item<% if ( !topic.imgUrl ) { %> topic-item-text<% } %>">
+		        	<div class="topic-user">
+	                    <img class="topic-head" src="<%=topic.headImg%>">
+	                    <span class="topic-name">
+	                    	<%=topic.username%>
+	                    </span>
+	                </div>
+		            <div class="topic-body">
+		            	<% if (topic.imgUrl) { %>
+		            	<div class="topic-photo-wrap">
+			        		<img class="topic-photo" src="<%=topic.imgUrl%>">
+			            </div>
+			            <% } %>
+			            <div class="topic-content">
+		            		<a href="topic-frame.html?username=<%=topic.username%>&words=<%=topic.words%>&imgUrl=<%=topic.imgUrl%>&headImg=<%=topic.headImg%>&wallName=<%=wall.name%>"><%=topic.words%></a>
+		            	</div>
+		            </div>
+		            <div class="topic-action">
+		                <a class="icon icon--bubble js-comment" href="javascript:void(0);"></a>
+		                <a class="icon icon--heart js-like" href="javascript:void(0);"></a>
+		            </div>
+		        </div>
+		<% } else { %>
+				<div class="topic-item<% if ( !topic.imgUrl ) { %> topic-item-text<% } %>">
+		        	<div class="topic-user">
+	                    <img class="topic-head" src="<%=topic.headImg%>">
+	                    <span class="topic-name">
+	                    	<%=topic.username%>
+	                    </span>
+	                </div>
+		            <div class="topic-body">
+		            	<% if (topic.imgUrl) { %>
+		            	<div class="topic-photo-wrap">
+			        		<img class="topic-photo" src="<%=topic.imgUrl%>">
+			            </div>
+			            <% } %>
+			            <div class="topic-content">
+		            		<a href="topic-frame.html?username=<%=topic.username%>&words=<%=topic.words%>&imgUrl=<%=topic.imgUrl%>&headImg=<%=topic.headImg%>&wallName=<%=wall.name%>"><%=topic.words%></a>
+		            	</div>
+		            </div>
+		            <div class="topic-action">
+		                <a class="icon icon--bubble js-comment" href="javascript:void(0);"></a>
+		                <a class="icon icon--heart js-like" href="javascript:void(0);"></a>
+		            </div>
+		        </div>
+			</div>
+		<% }
+	} %>
 <% } %>
