@@ -17,7 +17,11 @@ define([
 	var contentPage = null;
 	var wall = {
 		key: searchObject.wallKey || '',
-		name: searchObject.wallName || ''
+		name: searchObject.wallName || '',
+		address: searchObject.address || '',
+		lat: searchObject.lat || '',
+		lng: searchObject.lng || '',
+		tel: searchObject.telephone || ''
 	};
 	
 	/************************************************************************************
@@ -58,6 +62,7 @@ define([
 	mui.ready(function(){
 		$('.js-page-head').text(decodeURIComponent(wall.name));
 		getTopicList(wall);
+		postExtraData(wall); //额外向服务端发送数据
 	});
 	
 //	setTimeout(function(){
@@ -84,6 +89,17 @@ define([
 		})
 		.fail(function(error){
 			return alert('TopicList接口请求失败：' + error.message);
+		});
+	}
+	
+	function postExtraData(wall){
+		$.ajax({
+			url: 'http://210.52.217.236/wall/add',
+			type: 'POST',
+			data: wall,
+			error: function(){
+				alert('/wall/add接口请求失败');
+			}
 		});
 	}
 	
