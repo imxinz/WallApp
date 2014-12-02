@@ -101,7 +101,8 @@ define([
 		});
 	}
 	function addPhoto(path) {
-		var task = plus.uploader.createUpload( "http://210.52.217.236:8080/topic/uploadImg", 
+		var task = plus.uploader.createUpload( "http://210.52.217.236/topic/uploadImg", 
+//		var task = plus.uploader.createUpload( "http://182.118.20.208/topic/uploadImg",
 //		var task = plus.uploader.createUpload( "http://10.16.29.96:8080/topic/uploadImg", 
 			{ method:"POST",priority:100 },
 			function ( t, status ) {

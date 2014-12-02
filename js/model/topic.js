@@ -5,7 +5,8 @@
 define([], function(){
 	'use strict';
 	
-	var host = 'http://210.52.217.236:8080';
+	var host = 'http://210.52.217.236';
+//	var host = 'http://182.118.20.208';
 //	var host = 'http://10.16.29.96:8080';
 	var path = {
 		getTopicListByWallId: '/topic/list', // { wallKey: 墙id, pn: 页 }
