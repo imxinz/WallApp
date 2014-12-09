@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>帖详情</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="../css/mui.min.css">
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+	<style>
+	#commentHeader{display:flex;width:100%;flex-direction:row;}
+	.topic{position: relative;display:inline-block;width:100%;min-height:200px;}
+	.topic .topic-photo{width:100%;height:100%;position: absolute;top:0;left:0;z-index:2;}
+	.topic .topic-content{
+		position: absolute;top:0;left:0;z-index:3;width:100%;
+		background: rgba(0,0,0,0.25);color:#fff;height:100%;
+		display: -webkit-box;-webkit-box-align: center;
+	}
+	.comment-item .comment-head-img{border-radius:100%;}
+	input[type=text]{margin:0 0 0 5px;width:98%;}
+	.mui-bar-tab .mui-tab-item{width:20%;}
+	.mui-bar-tab .mui-tab-item-input{width:80%;}
+	.appui-like{font-style:normal;display:inline-block;float:right;}
+	.icon-like{width:60px;height:60px;}
+	</style>
+	<script src="../js/mui.min.js"></script>
+</head>
+<body class="wall-frame">
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	<h1 class="mui-title js-page-head"></h1>
+</header>	
+<div id="commentPage" class="mui-content">
+	<div id="commentHeader">
+		<div class="topic">
+			<img class="mui-media-object topic-photo" src="http://p5.qhimg.com/t010be718abebc8763a.jpg" />
+			<div class="mui-media-body topic-content">一切都只是因为爱的不够！否则谁能做到如此狠心！欺骗了自己那么久，再也没有继续骗下去的理由...这是我的选择，活该我自己承受！</div>
+			<div class="appui-topic-info">
+				<div class="topic-author">杨幂</div>
+				<div class="topic-comment-num">评论<i>2</i></div>
+				<div class="appui-like"><i>4</i><i class="icon iconfont">&#xe669;</i></div>
+			</div>
+		</div>
+	</div>
+	<div id="commentList">
+		<ul class="mui-table-view">			
+			<li class="mui-table-view-cell mui-media comment-item">
+				<a href="#">
+					<img class="mui-media-object mui-pull-left comment-head-img" src="http://dcloudio.github.io/mui/assets/img/shuijiao.jpg">
+					<div class="mui-media-body">
+						幸福
+						<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+					</div>
+					<div class="mui-media-foot">
+						<div class="appui-like"><i>4</i><i class="icon iconfont">&#xe669;</i></div>
+					</div>
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media comment-item">
+				<a href="#">
+					<img class="mui-media-object mui-pull-left comment-head-img" src="http://dcloudio.github.io/mui/assets/img/muwu.jpg">
+					<div class="mui-media-body">
+						木屋
+						<p class="mui-ellipsis">想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+					</div>
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media comment-item">
+				<a href="#">
+					<img class="mui-media-object mui-pull-left comment-head-img" src="http://dcloudio.github.io/mui/assets/img/cbd.jpg">
+					<div class="mui-media-body">
+						CBD
+						<p class="mui-ellipsis">烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>
+					</div>					
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media comment-item">
+				<a href="#">
+					<img class="mui-media-object mui-pull-left comment-head-img" src="http://dcloudio.github.io/mui/assets/img/shuijiao.jpg">
+					<div class="mui-media-body">
+						幸福
+						<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+					</div>
+					<div class="mui-media-foot">
+						<div class="appui-like"><i>4</i><i class="icon iconfont">&#xe669;</i></div>
+					</div>
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media comment-item">
+				<a href="#">
+					<img class="mui-media-object mui-pull-left comment-head-img" src="http://dcloudio.github.io/mui/assets/img/muwu.jpg">
+					<div class="mui-media-body">
+						木屋
+						<p class="mui-ellipsis">想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+					</div>
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media comment-item">
+				<a href="#">
+					<img class="mui-media-object mui-pull-left comment-head-img" src="http://dcloudio.github.io/mui/assets/img/cbd.jpg">
+					<div class="mui-media-body">
+						CBD
+						<p class="mui-ellipsis">烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>
+					</div>					
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media comment-item">
+				<a href="#">
+					<img class="mui-media-object mui-pull-left comment-head-img" src="http://dcloudio.github.io/mui/assets/img/shuijiao.jpg">
+					<div class="mui-media-body">
+						幸福
+						<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+					</div>
+					<div class="mui-media-foot">
+						<div class="appui-like"><i>4</i><i class="icon iconfont">&#xe669;</i></div>
+					</div>
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media comment-item">
+				<a href="#">
+					<img class="mui-media-object mui-pull-left comment-head-img" src="http://dcloudio.github.io/mui/assets/img/muwu.jpg">
+					<div class="mui-media-body">
+						木屋
+						<p class="mui-ellipsis">想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+					</div>
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media comment-item">
+				<a href="#">
+					<img class="mui-media-object mui-pull-left comment-head-img" src="http://dcloudio.github.io/mui/assets/img/cbd.jpg">
+					<div class="mui-media-body">
+						CBD
+						<p class="mui-ellipsis">烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>
+					</div>					
+				</a>
+			</li>
+		</ul>
+		
+	</div>
+</div>
+<nav class="mui-bar mui-bar-tab">
+	<div class="mui-tab-item mui-tab-item-input">
+		<input class="js-topic-input" type="text">	
+	</div>
+	<a href="javascript:void(0);" class="mui-tab-item js-add-topic">
+		<span class="mui-tab-label">发送</span>
+	</a>
+</nav>
+<script src="../js/lib/jquery.js"></script>
+<script src="../js/lib/require.js" data-main="../js/controller/comment-frame"></script>
+</body>
+</html>

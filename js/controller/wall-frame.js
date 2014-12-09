@@ -179,17 +179,31 @@ define([
 		});
 		//留言列表点击操作
 		mui('body').on('tap', 'a', function(e) {
-			var id = this.getAttribute('href');
+			var id = this.getAttribute('href'),
+				_style = this.getAttribute('data-style');
+			
+			try{
+				if(_style){
+					_style = JSON.parse(_style);
+				}else{
+					_style = {};
+				}	
+			}catch(e){
+				alert(e.message);
+			}
+			
+			_style = $.extend(_style, {
+						scrollIndicator : 'none',
+						zindex : 1
+					 });
+			
 			if (id) {
 				if (~id.indexOf('.html')) {
-					if (window.plus) {
-//						alert(this.href);
+					if (window.plus) {						
 						mui.openWindow({
 							id: id,
-//							url: this.href,
-							styles: {
-								scrollIndicator: none
-							}
+							url: id,
+							styles: _style
 						});
 					} else {
 						document.location.href = this.href;
